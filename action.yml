@@ -1,5 +1,5 @@
-name: "Claude Code Base Action"
-description: "Run Claude Code in GitHub Actions workflows"
+name: "Claude Max Code Base Action"
+description: "Run Claude Code in GitHub Actions workflows with your Claude Max subscription."
 branding:
   icon: "code"
   color: "orange"
@@ -55,6 +55,19 @@ inputs:
     required: false
     default: "10"
 
+  # Authentication settings
+  anthropic_api_key:
+    description: "Anthropic API key (required for direct Anthropic API)"
+    required: false
+    default: ""
+  use_bedrock:
+    description: "Use Amazon Bedrock with OIDC authentication instead of direct Anthropic API"
+    required: false
+    default: "false"
+  use_vertex:
+    description: "Use Google Vertex AI with OIDC authentication instead of direct Anthropic API"
+    required: false
+    default: "false"
   use_oauth:
     description: "Use Claude AI OAuth authentication instead of API key"
     required: false
@@ -75,20 +88,6 @@ inputs:
     description: "Personal Access Token with secrets:write permission to refresh OAuth tokens (required when use_oauth is true)"
     required: false
     default: ""
-
-  # Authentication settings
-  anthropic_api_key:
-    description: "Anthropic API key (required for direct Anthropic API)"
-    required: false
-    default: ""
-  use_bedrock:
-    description: "Use Amazon Bedrock with OIDC authentication instead of direct Anthropic API"
-    required: false
-    default: "false"
-  use_vertex:
-    description: "Use Google Vertex AI with OIDC authentication instead of direct Anthropic API"
-    required: false
-    default: "false"
 
   use_node_cache:
     description: "Whether to use Node.js dependency caching (set to true only for Node.js projects with lock files)"
@@ -125,7 +124,7 @@ runs:
 
     - name: Install Claude Code
       shell: bash
-      run: npm install -g @anthropic-ai/claude-code@1.0.33
+      run: npm install -g @anthropic-ai/claude-code@1.0.31
 
     - name: Run Claude Code Action
       shell: bash
